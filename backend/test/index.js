@@ -1,0 +1,27 @@
+const random = require("random")
+
+const min = 5
+const max = 10
+
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
+console.log("5 to 10 -->", random.int(min, max))
