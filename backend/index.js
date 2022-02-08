@@ -5,6 +5,8 @@ const colors = require("colors")
 const morgan = require("morgan")
 const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 
+const productRoutes = require("./routes/productRoutes")
+
 dotenv.config()
 connectDB()
 
@@ -17,6 +19,9 @@ if (process.env.NODE_ENV === "development") {
     res.send("Api is running...")
   })
 }
+
+// -------------------- Routes --------------------
+app.use("/api/products", productRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
