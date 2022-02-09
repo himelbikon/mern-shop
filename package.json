@@ -16,6 +16,7 @@
   "author": "SK Himel Bikon",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.25.0",
     "bcrypt": "^5.0.1",
     "colors": "^1.4.0",
     "dotenv": "^16.0.0",
