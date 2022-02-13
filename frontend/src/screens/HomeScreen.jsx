@@ -3,7 +3,10 @@ import { useSelector, useDispatch } from "react-redux"
 import CarouselSlider from "../components/CarouselSlider"
 import SomeProducts from "../components/SomeProducts"
 // import SlickSlider from "../components/SlickSlider"
-import { latestProductsAction } from "../actions/productActions"
+import {
+  latestProductsAction,
+  popularProductsAction,
+} from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 
@@ -16,15 +19,22 @@ const HomeScreen = () => {
     loading: latestProductsLoading,
   } = useSelector((state) => state.latestProducts)
 
+  const {
+    products: popularProducts,
+    error: popularProductsError,
+    loading: popularProductsLoading,
+  } = useSelector((state) => state.popularProducts)
+
   useEffect(() => {
     dispatch(latestProductsAction())
+    dispatch(popularProductsAction())
 
     return () => {}
   }, [dispatch])
 
   return (
     <>
-      {/* <CarouselSlider /> */}
+      <CarouselSlider />
 
       {latestProductsLoading ? (
         <Loader />
@@ -35,6 +45,18 @@ const HomeScreen = () => {
           title="Latest Products"
           link="/shop"
           products={latestProducts}
+        />
+      )}
+
+      {popularProductsLoading ? (
+        <Loader />
+      ) : popularProductsError ? (
+        <Message>{popularProductsError}</Message>
+      ) : (
+        <SomeProducts
+          title="Popular Products"
+          link="/shop?popular"
+          products={popularProducts}
         />
       )}
 

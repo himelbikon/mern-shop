@@ -58,7 +58,7 @@ const productsByOrderCount = asyncHandler(async (req, res) => {
   const products = await Product.find({})
     .limit(limit)
     .skip(limit * (page - 1))
-    .sort("-order -_id")
+    .sort("-orderCount -_id")
 
   res.json(products)
 })
