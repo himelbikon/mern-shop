@@ -9,10 +9,13 @@ import {
 
 import { allCategoriesReducer } from "./reducers/categoryReducers"
 
+import { showcaseProductsReducers } from "./reducers/showcaseReducers"
+
 const reducer = combineReducers({
   latestProducts: latestProductsReducer,
   popularProducts: popularProductsReducer,
   allCategories: allCategoriesReducer,
+  showcaseProducts: showcaseProductsReducers,
 })
 
 const initialState = {}

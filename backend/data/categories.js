@@ -2,27 +2,27 @@ const categories = [
   {
     name: "Pendrive",
     slug: "pendrive",
-    image: "images/categories/pendrive.jpg",
+    image: "images/category/pendrive.jpg",
   },
   {
     name: "Android",
     slug: "android",
-    image: "images/categories/android.jpg",
+    image: "images/category/android.jpg",
   },
   {
     name: "Smart Watch",
     slug: "smart-watch",
-    image: "images/categories/smart_watch.jpg",
+    image: "images/category/smart-watch.jpg",
   },
   {
     name: "Shoe",
     slug: "shoe",
-    image: "images/categories/shoe.jpg",
+    image: "images/category/shoe.jpg",
   },
   {
     name: "Power Bank",
     slug: "power-bank",
-    image: "images/categories/power-bank.jpg",
+    image: "images/category/power-bank.jpg",
   },
 ]
 

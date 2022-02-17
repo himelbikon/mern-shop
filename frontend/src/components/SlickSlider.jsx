@@ -1,8 +1,11 @@
 import React from "react"
+import { useSelector } from "react-redux"
 import Slider from "react-slick"
 import "slick-carousel/slick/slick.css"
 import "slick-carousel/slick/slick-theme.css"
 import SliderCard from "./SliderCard"
+import Loader from "../components/Loader"
+import Message from "./Message"
 
 const SlickSlider = () => {
   const settings = {
@@ -39,30 +42,31 @@ const SlickSlider = () => {
     ],
   }
 
+  const {
+    products: latestProducts,
+    error: latestProductsError,
+    loading: latestProductsLoading,
+  } = useSelector((state) => state.latestProducts)
+
   return (
-    <div>
-      {/* <h2> Single Item</h2> */}
-      <Slider {...settings}>
+    <>
+      {latestProductsLoading ? (
+        <Loader />
+      ) : latestProductsError ? (
+        <Message>{latestProductsError}</Message>
+      ) : (
         <div>
-          <SliderCard />
+          <h2 className="text-center">New Arivals</h2>
+          <Slider {...settings}>
+            {latestProducts.map((product) => (
+              <div key={product._id}>
+                <SliderCard product={product} />
+              </div>
+            ))}
+          </Slider>
         </div>
-        <div>
-          <SliderCard />
-        </div>
-        <div>
-          <SliderCard />
-        </div>
-        <div>
-          <SliderCard />
-        </div>
-        <div>
-          <SliderCard />
-        </div>
-        <div>
-          <SliderCard />
-        </div>
-      </Slider>
-    </div>
+      )}
+    </>
   )
 }
 

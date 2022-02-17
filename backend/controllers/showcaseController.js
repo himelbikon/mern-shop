@@ -10,11 +10,7 @@ const allShowcases = asyncHandler(async (req, res) => {
     "_id name image description"
   )
 
-  //   showcases = showcases.map((showcase) => {
-  //     return Showcase.findById(showcase._id).populate("product", "name")
-  //   })
-
-  res.json(showcases) //.populate("Product", "_id name image description")
+  res.json(showcases) 
 })
 
 module.exports = { allShowcases }

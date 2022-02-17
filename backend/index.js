@@ -25,7 +25,7 @@ if (process.env.NODE_ENV === "development") {
 // -------------------- Routes --------------------
 app.use("/api/products", productRoutes)
 app.use("/api/categories", categoryRoutes)
-app.use("/api/showcase", showcaseRoutes)
+app.use("/api/showcases", showcaseRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
