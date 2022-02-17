@@ -7,9 +7,12 @@ import {
   popularProductsReducer,
 } from "./reducers/productReducers"
 
+import { allCategoriesReducer } from "./reducers/categoryReducers"
+
 const reducer = combineReducers({
   latestProducts: latestProductsReducer,
   popularProducts: popularProductsReducer,
+  allCategories: allCategoriesReducer,
 })
 
 const initialState = {}

@@ -9,7 +9,7 @@ import {
   POPULAR_PRODUCTS_FAIL,
 } from "../constants/productConstants"
 
-export const latestProductsAction = () => async (dispatch) => {
+export const getLatestProducts = () => async (dispatch) => {
   try {
     dispatch({ type: LATEST_PRODUCTS_REQUEST })
 
@@ -27,7 +27,7 @@ export const latestProductsAction = () => async (dispatch) => {
   }
 }
 
-export const popularProductsAction = () => async (dispatch) => {
+export const getPopularProducts = () => async (dispatch) => {
   try {
     dispatch({ type: POPULAR_PRODUCTS_REQUEST })
 
