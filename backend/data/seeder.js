@@ -7,11 +7,12 @@ const Category = require("../models/categoryModel")
 const Product = require("../models/productModel")
 const User = require("../models/userModel")
 const Showcase = require("../models/showcaseModel")
+const Subscription = require("../models/subscriptionModel")
 
 const users = require("./users")
 const categories = require("./categories")
 const products = require("./products")
-const showcases = require("./showcases")
+const subscriptions = require("./subscriptions")
 
 dotenv.config()
 connectDB()
@@ -24,6 +25,7 @@ const importData = async () => {
     await Product.deleteMany()
     await User.deleteMany()
     await Showcase.deleteMany()
+    await Subscription.deleteMany()
 
     const createdCategories = await Category.insertMany(categories)
 
@@ -40,7 +42,13 @@ const importData = async () => {
     })
 
     await Product.insertMany(sampleProducts)
-    await Showcase.insertMany(showcases)
+
+    const showcase = {
+      product: products[random.int(0, products.length - 1)]._id,
+    }
+
+    await Showcase.insertMany(showcase)
+    await Subscription.insertMany(subscriptions)
 
     console.log(`[+] Data imported successfully!`.green.inverse)
 
@@ -60,6 +68,7 @@ const destroyData = async () => {
     await Product.deleteMany()
     await User.deleteMany()
     await Showcase.deleteMany()
+    await Subscription.deleteMany()
 
     process.exit()
   } catch (error) {

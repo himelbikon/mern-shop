@@ -8,6 +8,7 @@ const { notFound, errorHandler } = require("./middleware/errorMiddleware")
 const productRoutes = require("./routes/productRoutes")
 const categoryRoutes = require("./routes/categoryRoutes")
 const showcaseRoutes = require("./routes/showcaseRoutes")
+const subscriptionRoutes = require("./routes/subscriptionRoutes")
 
 dotenv.config()
 connectDB()
@@ -26,6 +27,7 @@ if (process.env.NODE_ENV === "development") {
 app.use("/api/products", productRoutes)
 app.use("/api/categories", categoryRoutes)
 app.use("/api/showcases", showcaseRoutes)
+app.use("/api/subscriptions", subscriptionRoutes)
 
 app.use(notFound)
 app.use(errorHandler)
