@@ -1,7 +1,16 @@
-import React, { useEffect } from "react"
+import React, { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 import { Link } from "react-router-dom"
-import { Row, Col, Image } from "react-bootstrap"
+import {
+  Row,
+  Col,
+  Image,
+  Form,
+  InputGroup,
+  FormControl,
+  Button,
+  ProgressBar,
+} from "react-bootstrap"
 import CarouselSlider from "../components/CarouselSlider"
 import SomeProducts from "../components/SomeProducts"
 import Loader from "../components/Loader"
@@ -13,11 +22,15 @@ import {
   getPopularProducts,
 } from "../actions/productActions"
 
+import { postSubscription } from "../actions/subscriptionActions"
+
 import { getAllCategories } from "../actions/categoryActions"
 import { getShowcaseProducts } from "../actions/showcaseActions"
 
 const HomeScreen = () => {
   const dispatch = useDispatch()
+
+  const [subscriptionEmail, setSubscriptionEmail] = useState("")
 
   const {
     products: latestProducts,
@@ -43,6 +56,12 @@ const HomeScreen = () => {
     loading: showcaseProductsLoading,
   } = useSelector((state) => state.showcaseProducts)
 
+  const {
+    error: createSubscriptionError,
+    loading: createSubscriptionLoading,
+    success: createSubscriptionSuccess,
+  } = useSelector((state) => state.createSubscription)
+
   useEffect(() => {
     dispatch(getLatestProducts())
     dispatch(getPopularProducts())
@@ -51,6 +70,11 @@ const HomeScreen = () => {
 
     return () => {}
   }, [dispatch])
+
+  const subscriptionHandler = (e) => {
+    e.preventDefault()
+    dispatch(postSubscription(subscriptionEmail))
+  }
 
   return (
     <>
@@ -137,6 +161,47 @@ const HomeScreen = () => {
 
       <section className="my-5">
         <SlickSlider />
+      </section>
+
+      <section className="p-5 text-white" style={{ background: "#378dfc" }}>
+        <Row className="py-5">
+          <Col lg={6}>
+            <h2 className="text-white">Get Our Latest Offers News</h2>
+            <div>Subscribe news latter</div>
+          </Col>
+          <Col lg={6}>
+            <div>
+              <Form onSubmit={subscriptionHandler}>
+                <InputGroup className="">
+                  <FormControl
+                    type="email"
+                    required
+                    placeholder="Enter your email, please!"
+                    aria-label="Enter your email, please!"
+                    aria-describedby="basic-addon2"
+                    onChange={(e) => setSubscriptionEmail(e.target.value)}
+                  />
+                  <Button type="submit" variant="secondary" id="button-addon2">
+                    Subscribe
+                  </Button>
+                </InputGroup>
+              </Form>
+            </div>
+
+            <div className="my-2">
+              {createSubscriptionLoading ? (
+                <ProgressBar animated now={100} />
+              ) : createSubscriptionSuccess ? (
+                <Message variant="success">
+                  Email submitted successfully!
+                </Message>
+              ) : createSubscriptionError ? (
+                <Message variant="info">{createSubscriptionError}</Message>
+              ) : null}
+            </div>
+            {/*  */}
+          </Col>
+        </Row>
       </section>
     </>
   )

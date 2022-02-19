@@ -41,10 +41,10 @@ const importData = async () => {
       }
     })
 
-    await Product.insertMany(sampleProducts)
+    const savedProducts = await Product.insertMany(sampleProducts)
 
     const showcase = {
-      product: products[random.int(0, products.length - 1)]._id,
+      product: savedProducts[random.int(0, products.length - 1)]._id,
     }
 
     await Showcase.insertMany(showcase)

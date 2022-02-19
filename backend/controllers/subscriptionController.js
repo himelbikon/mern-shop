@@ -14,6 +14,15 @@ const allSubscriptions = asyncHandler(async (req, res) => {
 // @route POST /api/subscriptions
 // @access Public
 const createSubscription = asyncHandler(async (req, res) => {
+  const existingSubscription = (await Subscription.find({})).find((email) => {
+    return email.email === req.body.email
+  })
+
+  if (existingSubscription) {
+    res.status(400)
+    throw new Error("Email already exists")
+  }
+
   const subscription = new Subscription({
     email: req.body.email,
   })

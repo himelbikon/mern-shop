@@ -11,11 +11,14 @@ import { allCategoriesReducer } from "./reducers/categoryReducers"
 
 import { showcaseProductsReducers } from "./reducers/showcaseReducers"
 
+import { createSubscriptionReducers } from "./reducers/subscriptionReducers"
+
 const reducer = combineReducers({
   latestProducts: latestProductsReducer,
   popularProducts: popularProductsReducer,
   allCategories: allCategoriesReducer,
   showcaseProducts: showcaseProductsReducers,
+  createSubscription: createSubscriptionReducers,
 })
 
 const initialState = {}
