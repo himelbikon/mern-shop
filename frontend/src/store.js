@@ -5,6 +5,7 @@ import { composeWithDevTools } from "redux-devtools-extension"
 import {
   latestProductsReducer,
   popularProductsReducer,
+  orderByProductsReducer,
 } from "./reducers/productReducers"
 
 import { allCategoriesReducer } from "./reducers/categoryReducers"
@@ -19,6 +20,7 @@ const reducer = combineReducers({
   allCategories: allCategoriesReducer,
   showcaseProducts: showcaseProductsReducers,
   createSubscription: createSubscriptionReducers,
+  orderByProducts: orderByProductsReducer,
 })
 
 const initialState = {}
