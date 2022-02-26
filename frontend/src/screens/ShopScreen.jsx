@@ -2,10 +2,7 @@ import React, { useEffect } from "react"
 import { Row, Col, ListGroup, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { LinkContainer } from "react-router-bootstrap"
-import {
-  getOrderByProducts,
-  resetShopProducts,
-} from "../actions/productActions"
+import { resetShopProducts } from "../actions/productActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 import ProductCard from "../components/ProductCard"
@@ -18,42 +15,18 @@ const ShopScreen = () => {
     cursor: "pointer",
   }
 
-  const {
-    loading: orderByLoading,
-    products: orderByProducts,
-    error: orderByError,
-  } = useSelector((state) => state.orderByProducts)
-
   useEffect(() => {
-    dispatch(getOrderByProducts())
-
-    return () => {
-      dispatch(resetShopProducts())
-    }
+    return () => {}
   }, [dispatch])
 
   const productsHandler = () => {
-    dispatch(getOrderByProducts())
+    // dispatch(getOrderByProducts())
   }
 
   return (
     <section>
       <Row>
         <Col lg={9}>
-          {orderByLoading ? (
-            <Loader />
-          ) : orderByError ? (
-            <Message>{orderByError}</Message>
-          ) : (
-            <Row>
-              {orderByProducts.map((product) => (
-                <Col md={6} lg={4} key={product._id}>
-                  <ProductCard product={product} />
-                </Col>
-              ))}
-            </Row>
-          )}
-
           <div className="text-center">
             <Button variant="primary" onClick={productsHandler}>
               Show More

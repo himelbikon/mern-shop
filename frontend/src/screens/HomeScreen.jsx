@@ -19,7 +19,8 @@ import CategoryCard from "../components/CategoryCard"
 import SlickSlider from "../components/SlickSlider"
 import {
   getLatestProducts,
-  getPopularProducts,
+  getmostViewedProducts,
+  resetAllProducts,
 } from "../actions/productActions"
 
 import { postSubscription } from "../actions/subscriptionActions"
@@ -39,10 +40,10 @@ const HomeScreen = () => {
   } = useSelector((state) => state.latestProducts)
 
   const {
-    products: popularProducts,
-    error: popularProductsError,
-    loading: popularProductsLoading,
-  } = useSelector((state) => state.popularProducts)
+    products: mostViewedProducts,
+    error: mostViewedProductsError,
+    loading: mostViewedProductsLoading,
+  } = useSelector((state) => state.mostViewedProducts)
 
   const {
     categories: allCategories,
@@ -64,11 +65,13 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(getLatestProducts())
-    dispatch(getPopularProducts())
+    dispatch(getmostViewedProducts())
     dispatch(getAllCategories())
     dispatch(getShowcaseProducts())
 
-    return () => {}
+    return () => {
+      dispatch(resetAllProducts())
+    }
   }, [dispatch])
 
   const subscriptionHandler = (e) => {
@@ -92,15 +95,15 @@ const HomeScreen = () => {
         />
       )}
 
-      {popularProductsLoading ? (
+      {mostViewedProductsLoading ? (
         <Loader />
-      ) : popularProductsError ? (
-        <Message>{popularProductsError}</Message>
+      ) : mostViewedProductsError ? (
+        <Message>{mostViewedProductsError}</Message>
       ) : (
         <SomeProducts
-          title="Popular Products"
+          title="Most Viewed Products"
           link="/shop?popular"
-          products={popularProducts}
+          products={mostViewedProducts}
         />
       )}
 

@@ -2,15 +2,16 @@ const express = require("express")
 const {
   allProducts,
   getProductById,
-  popularProducts,
+  productsByViews,
   productsByOrderCount,
 } = require("../controllers/productController")
 
 const router = express.Router()
 
 router.route("/").get(allProducts)
-router.route("/popular").get(popularProducts)
-router.route("/popularbyorder").get(productsByOrderCount)
+router.route("/popular/latest").get(allProducts)
+router.route("/popular/views").get(productsByViews)
+router.route("/popular/ordercount").get(productsByOrderCount)
 router.route("/:id").get(getProductById)
 // create products
 // edit products

@@ -2,7 +2,7 @@ const asyncHandler = require("express-async-handler")
 const Product = require("../models/productModel")
 
 // @desc all products
-// @route GET /api/products
+// @route GET /api/products && /api/products/latest
 // @access Public
 const allProducts = asyncHandler(async (req, res) => {
   const limit = Number(req.query.limit) || 0
@@ -34,9 +34,9 @@ const getProductById = asyncHandler(async (req, res) => {
 })
 
 // @desc Popular products
-// @route GET /api/products/popular
+// @route GET /api/products/popular/views
 // @access Public
-const popularProducts = asyncHandler(async (req, res) => {
+const productsByViews = asyncHandler(async (req, res) => {
   const limit = Number(req.query.limit) || 0
   const page = Number(req.query.page) || 1
 
@@ -49,7 +49,7 @@ const popularProducts = asyncHandler(async (req, res) => {
 })
 
 // @desc Most ordered products
-// @route GET /api/products/popularbyorder
+// @route GET /api/products/popular/ordercount
 // @access Public
 const productsByOrderCount = asyncHandler(async (req, res) => {
   const limit = Number(req.query.limit) || 0
@@ -66,6 +66,6 @@ const productsByOrderCount = asyncHandler(async (req, res) => {
 module.exports = {
   allProducts,
   getProductById,
-  popularProducts,
+  productsByViews,
   productsByOrderCount,
 }
