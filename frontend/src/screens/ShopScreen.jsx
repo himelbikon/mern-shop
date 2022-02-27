@@ -4,6 +4,7 @@ import { Row, Col, ListGroup, Button } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { LinkContainer } from "react-router-bootstrap"
 import { resetAllProducts, getShopProducts } from "../actions/productActions"
+import { getAllCategories } from "../actions/categoryActions"
 import Loader from "../components/Loader"
 import Message from "../components/Message"
 import ProductCard from "../components/ProductCard"
@@ -24,8 +25,12 @@ const ShopScreen = () => {
   const { categories } = useSelector((state) => state.allCategories)
 
   useEffect(() => {
+    dispatch(getAllCategories())
+
     if (params.get("popular")) {
       dispatch(getShopProducts("popular", params.get("popular")))
+    } else if (params.get("category")) {
+      dispatch(getShopProducts("category", params.get("category")))
     } else {
       dispatch(getShopProducts())
     }
@@ -38,6 +43,8 @@ const ShopScreen = () => {
   const productsHandler = () => {
     if (params.get("popular")) {
       dispatch(getShopProducts("popular", params.get("popular")))
+    } else if (params.get("category")) {
+      dispatch(getShopProducts("category", params.get("category")))
     } else {
       dispatch(getShopProducts())
     }

@@ -1,5 +1,6 @@
 const asyncHandler = require("express-async-handler")
 const Product = require("../models/productModel")
+const Category = require("../models/categoryModel")
 
 // @desc all products
 // @route GET /api/products && /api/products/latest
@@ -48,8 +49,26 @@ const productsByField = asyncHandler(async (req, res) => {
   res.json(products)
 })
 
+// @desc Category products
+// @route GET /api/products/category/:slug
+// @access Public
+const categoryProducts = asyncHandler(async (req, res) => {
+  const limit = Number(req.query.limit) || 0
+  const page = Number(req.query.page) || 1
+
+  const category = await Category.findOne({ slug: req.params.slug })
+
+  const products = await Product.find({ category: category._id })
+    .limit(limit)
+    .skip(limit * (page - 1))
+    .sort(`-_id`)
+
+  res.json(products)
+})
+
 module.exports = {
   allProducts,
   getProductById,
   productsByField,
+  categoryProducts,
 }
