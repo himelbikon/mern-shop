@@ -19,7 +19,7 @@ import CategoryCard from "../components/CategoryCard"
 import SlickSlider from "../components/SlickSlider"
 import {
   getLatestProducts,
-  getmostViewedProducts,
+  getMostViewedProducts,
   resetAllProducts,
 } from "../actions/productActions"
 
@@ -65,7 +65,7 @@ const HomeScreen = () => {
 
   useEffect(() => {
     dispatch(getLatestProducts())
-    dispatch(getmostViewedProducts())
+    dispatch(getMostViewedProducts())
     dispatch(getAllCategories())
     dispatch(getShowcaseProducts())
 

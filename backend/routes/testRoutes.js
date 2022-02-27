@@ -1,8 +1,12 @@
 const express = require("express")
-const { productsByViews } = require("../controllers/testController")
+const {
+  allProducts,
+  productsByField,
+} = require("../controllers/testController")
 
 const router = express.Router()
 
-router.route("/products/popular/views").get(productsByViews)
+router.route("/products").get(allProducts)
+router.route("/products/popular/:field").get(productsByField)
 
 module.exports = router

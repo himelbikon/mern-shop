@@ -33,32 +33,17 @@ const getProductById = asyncHandler(async (req, res) => {
   }
 })
 
-// @desc Popular products
-// @route GET /api/products/popular/views
+// @desc Products by a specific field order
+// @route GET /api/products/popular/:field
 // @access Public
-const productsByViews = asyncHandler(async (req, res) => {
+const productsByField = asyncHandler(async (req, res) => {
   const limit = Number(req.query.limit) || 0
   const page = Number(req.query.page) || 1
 
   const products = await Product.find({})
     .limit(limit)
     .skip(limit * (page - 1))
-    .sort("-views -_id")
-
-  res.json(products)
-})
-
-// @desc Most ordered products
-// @route GET /api/products/popular/ordercount
-// @access Public
-const productsByOrderCount = asyncHandler(async (req, res) => {
-  const limit = Number(req.query.limit) || 0
-  const page = Number(req.query.page) || 1
-
-  const products = await Product.find({})
-    .limit(limit)
-    .skip(limit * (page - 1))
-    .sort("-orderCount -_id")
+    .sort(`-${req.params.field} -_id`)
 
   res.json(products)
 })
@@ -66,6 +51,5 @@ const productsByOrderCount = asyncHandler(async (req, res) => {
 module.exports = {
   allProducts,
   getProductById,
-  productsByViews,
-  productsByOrderCount,
+  productsByField,
 }
