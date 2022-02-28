@@ -10,11 +10,11 @@ const ProductCard = ({ product }) => {
 
   return (
     <Card className="my-2">
-      <LinkContainer to="/shop/2323" style={linkStyle}>
+      <LinkContainer to={`/shop/${product._id}`} style={linkStyle}>
         <Card.Img variant="top" src={imgPath} alt={imgPath} className="h-100" />
       </LinkContainer>
       <Card.Body>
-        <LinkContainer to="/shop/2323" style={linkStyle}>
+        <LinkContainer to={`/shop/${product._id}`} style={linkStyle}>
           <Card.Title>{product.name}</Card.Title>
         </LinkContainer>
         <Card.Text as="div">

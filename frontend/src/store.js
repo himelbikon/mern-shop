@@ -6,13 +6,12 @@ import {
   latestProductsReducer,
   mostViewedProductsReducer,
   shopProductsReducer,
+  singleProductReducer,
 } from "./reducers/productReducers"
-
 import { allCategoriesReducer } from "./reducers/categoryReducers"
-
 import { showcaseProductsReducers } from "./reducers/showcaseReducers"
-
 import { createSubscriptionReducers } from "./reducers/subscriptionReducers"
+import { cartReducer } from "./reducers/cartReducers"
 
 const reducer = combineReducers({
   latestProducts: latestProductsReducer,
@@ -21,6 +20,8 @@ const reducer = combineReducers({
   showcaseProducts: showcaseProductsReducers,
   createSubscription: createSubscriptionReducers,
   shopProducts: shopProductsReducer,
+  singleProduct: singleProductReducer,
+  cart: cartReducer,
 })
 
 const initialState = {}

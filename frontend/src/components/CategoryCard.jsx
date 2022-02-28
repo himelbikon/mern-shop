@@ -6,7 +6,7 @@ const CategoryCard = ({ category }) => {
   return (
     <Card>
       <Link
-        to={`/shop?category=${category.name}`}
+        to={`/shop?category=${category.slug}`}
         style={{ textDecoration: "none", color: "inherit" }}
       >
         <Card.Img
