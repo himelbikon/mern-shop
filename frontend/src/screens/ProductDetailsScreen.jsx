@@ -6,13 +6,13 @@ import Loader from "../components/Loader"
 import Message from "../components/Message"
 import { getSingleProduct } from "../actions/productActions"
 import { SINGLE_PRODUCT_RESET } from "../constants/productConstants"
-import { addToCart } from "../actions/cartActions"
+import { addToCart, deleteFromCart } from "../actions/cartActions"
 
 const ProductDetailsScreen = () => {
   const dispatch = useDispatch()
   const params = useParams()
 
-  const [qty, setQty] = useState(0)
+  const [qty, setQty] = useState(1)
 
   const { product, loading, error } = useSelector(
     (state) => state.singleProduct
@@ -28,9 +28,12 @@ const ProductDetailsScreen = () => {
     }
   }, [dispatch, params])
 
-  const cartHandler = () => {
-    console.log("first", { product, qty })
+  const cartAddHandler = () => {
     dispatch(addToCart(product, qty))
+  }
+
+  const cartDeleteHandler = () => {
+    dispatch(deleteFromCart(product._id))
   }
 
   return (
@@ -64,6 +67,7 @@ const ProductDetailsScreen = () => {
                     as="select"
                     value={qty}
                     onChange={(e) => setQty(e.target.value)}
+                    disabled={product.countInStock <= 0}
                   >
                     {[...Array(product.countInStock).keys()].map((x) => (
                       <option key={x + 1} value={x + 1}>
@@ -76,7 +80,7 @@ const ProductDetailsScreen = () => {
                 <Col xs={6}>
                   <Button
                     variant="dark"
-                    onClick={cartHandler}
+                    onClick={cartAddHandler}
                     disabled={product.countInStock <= 0}
                   >
                     Add to Cart
@@ -92,9 +96,11 @@ const ProductDetailsScreen = () => {
                     (item) => item.product._id === product._id
                   ) && (
                     <Row className="justify-content-between">
-                      <Col>Product already in cart</Col>
+                      <Col className="my-2">Product already in cart!</Col>
                       <Col>
-                        <Button>Delete From Cart</Button>
+                        <Button variant="danger" onClick={cartDeleteHandler}>
+                          Delete From Cart
+                        </Button>
                       </Col>
                     </Row>
                   )}
