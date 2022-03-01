@@ -8,7 +8,7 @@ import { getSingleProduct } from "../actions/productActions"
 import { SINGLE_PRODUCT_RESET } from "../constants/productConstants"
 import { addToCart, deleteFromCart } from "../actions/cartActions"
 
-const ProductDetailsScreen = () => {
+const ProductScreen = () => {
   const dispatch = useDispatch()
   const params = useParams()
 
@@ -119,4 +119,4 @@ const ProductDetailsScreen = () => {
   )
 }
 
-export default ProductDetailsScreen
+export default ProductScreen

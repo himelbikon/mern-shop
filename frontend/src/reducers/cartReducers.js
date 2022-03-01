@@ -30,8 +30,13 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         ),
       }
 
-    // case CART_ITEM_UPDATE:
-    //   return { loading: false, error: action.payload }
+    // case CART_CHANGE_QUANTITY:
+    //   const { product, quantity } = action.payload
+    //   return {
+    //     cartItems: state.cartItems.map((item) => {
+    //       return item.product._id === product._id ? { product, quantity } : item
+    //     }),
+    //   }
 
     default:
       return state
