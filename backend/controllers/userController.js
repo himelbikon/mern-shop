@@ -10,6 +10,8 @@ const login = asyncHandler(async (req, res) => {
 
   let user = await User.findOne({ email })
 
+  // console.log("first", user, email, password)
+
   if (user && (await user.matchPassword(password))) {
     user = {
       _id: user._id,
@@ -30,23 +32,22 @@ const login = asyncHandler(async (req, res) => {
 // @route GET /api/users/profile
 // @access Public
 const getUserProfile = asyncHandler(async (req, res) => {
-  res.json("user")
-  //   let user = await User.findOne({ _id: req.user._id })
+  let user = await User.findById(req.user.id)
 
-  //   if (user ) {
-  //     user = {
-  //       _id: user._id,
-  //       name: user.name,
-  //       email: user.email,
-  //       isAdmin: user.isAdmin,
-  //       token: generateToken(user._id),
-  //     }
+  if (user) {
+    user = {
+      _id: user._id,
+      name: user.name,
+      email: user.email,
+      isAdmin: user.isAdmin,
+      token: generateToken(user._id),
+    }
 
-  //     res.json(user)
-  //   } else {
-  //     res.status(400)
-  //     throw new Error(`Invalid email or password`)
-  //   }
+    res.json(user)
+  } else {
+    res.status(400)
+    throw new Error(`Invalid email or password`)
+  }
 })
 
 module.exports = { login, getUserProfile }
