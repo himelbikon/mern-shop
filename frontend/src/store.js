@@ -13,6 +13,7 @@ import { showcaseProductsReducers } from "./reducers/showcaseReducers"
 import { createSubscriptionReducers } from "./reducers/subscriptionReducers"
 import { cartReducer } from "./reducers/cartReducers"
 import { userAuthReducer } from "./reducers/userReducers"
+import { createOrderReducer } from "./reducers/orderReducers"
 
 const reducer = combineReducers({
   latestProducts: latestProductsReducer,
@@ -24,6 +25,7 @@ const reducer = combineReducers({
   singleProduct: singleProductReducer,
   cart: cartReducer,
   userAuth: userAuthReducer,
+  createOrder: createOrderReducer,
 })
 
 const initialState = {

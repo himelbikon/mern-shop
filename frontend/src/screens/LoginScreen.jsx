@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Form, Button, Row, Col, Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
-import { Link, useNavigate, useSearchParams } from "react-router-dom"
+import { useNavigate, useSearchParams } from "react-router-dom"
 import { login } from "../actions/userActions"
 import "../styles/loginStyle.scss"
 import Message from "../components/Message"
@@ -84,9 +84,9 @@ const LoginScreen = () => {
             )}
           </Button>
 
-          <div className="mt-4 text-center">
+          {/* <div className="mt-4 text-center">
             No account? <Link to="/register">Register</Link>
-          </div>
+          </div> */}
         </Form>
       </Col>
     </Row>
