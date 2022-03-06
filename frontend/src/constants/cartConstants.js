@@ -1,3 +1,4 @@
 export const CART_ITEM_ADD = "CART_ITEM_ADD"
 export const CART_ITEM_REMOVE = "CART_ITEM_REMOVE"
+export const CART_CLEAR = "CART_CLEAR"
 // export const CART_CHANGE_QUANTITY = "CART_CHANGE_QUANTITY"

@@ -1,4 +1,5 @@
 import {
+  CART_CLEAR,
   CART_ITEM_ADD,
   CART_ITEM_REMOVE,
   // CART_ITEM_UPDATE,
@@ -16,13 +17,22 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         return {
           cartItems: state.cartItems.map((item) => {
             return item.product._id === product._id
-              ? { product, quantity, name, image }
+              ? {
+                  product,
+                  quantity,
+                  name,
+                  image,
+                  price: product.price * quantity,
+                }
               : item
           }),
         }
       } else {
         return {
-          cartItems: [...state.cartItems, { ...action.payload, name, image }],
+          cartItems: [
+            ...state.cartItems,
+            { ...action.payload, name, image, price: product.price * quantity },
+          ],
         }
       }
 
@@ -33,13 +43,9 @@ export const cartReducer = (state = { cartItems: [] }, action) => {
         ),
       }
 
-    // case CART_CHANGE_QUANTITY:
-    //   const { product, quantity } = action.payload
-    //   return {
-    //     cartItems: state.cartItems.map((item) => {
-    //       return item.product._id === product._id ? { product, quantity } : item
-    //     }),
-    //   }
+    case CART_CLEAR:
+      localStorage.removeItem("cart")
+      return { cartItems: [] }
 
     default:
       return state

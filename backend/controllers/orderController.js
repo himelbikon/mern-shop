@@ -27,7 +27,6 @@ const createOrder = asyncHandler(async (req, res) => {
     // })
 
     const order = new Order({ ...req.body, user: req.user._id })
-    console.log(`${order}`.yellow)
 
     try {
       const createdOrder = await order.save()

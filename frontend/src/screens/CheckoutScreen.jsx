@@ -12,7 +12,7 @@ const CheckoutScreen = () => {
 
   const { userInfo } = useSelector((state) => state.userAuth)
   const { cartItems } = useSelector((state) => state.cart)
-  const { loading, error } = useSelector((state) => state.createOrder)
+  const { loading, error, success } = useSelector((state) => state.createOrder)
 
   const linkStyle = { textDecoration: "none", color: "inherit" }
 
@@ -22,8 +22,7 @@ const CheckoutScreen = () => {
   const [address, setAddress] = useState("")
   const [city, setCity] = useState("")
   const [postalCode, setPostalCode] = useState("")
-  const [uniqueId, setUniqueId] = useState("")
-
+  // const [uniqueId, setUniqueId] = useState("")
   const [paymentMethod] = useState("PayPal")
 
   useEffect(() => {
@@ -31,8 +30,12 @@ const CheckoutScreen = () => {
       navigate(`/login?redirect=/checkout`)
     }
 
+    if (success) {
+      navigate(`/orders`)
+    }
+
     return () => {}
-  }, [userInfo, navigate])
+  }, [userInfo, navigate, success])
 
   const cartTotalPrice = () => {
     return cartItems.reduce(
@@ -90,7 +93,7 @@ const CheckoutScreen = () => {
               <Col md={6}>
                 <Form.Group
                   className="mb-3"
-                  controlId="exampleForm.ControlInput1"
+                  // controlId="exampleForm.ControlInput1"
                 >
                   <Form.Label>Name</Form.Label>
                   <Form.Control

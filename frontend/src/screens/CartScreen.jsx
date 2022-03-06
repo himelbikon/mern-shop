@@ -20,10 +20,9 @@ const CartScreen = () => {
   }
 
   const cartTotalPrice = () => {
-    return cartItems.reduce(
-      (acc, item) => acc + item.product.price * item.quantity,
-      0
-    )
+    return cartItems
+      .reduce((acc, item) => acc + item.product.price * item.quantity, 0)
+      .toFixed(2)
   }
 
   return (
@@ -47,7 +46,7 @@ const CartScreen = () => {
                       {item.product.name}
                     </Link>
                   </td>
-                  <td>${item.product.price * item.quantity}</td>
+                  <td>${item.price.toFixed(2)}</td>
                   <td>
                     <Form.Control
                       as="select"

@@ -47,11 +47,6 @@ const orderSchema = mongoose.Schema(
       required: true,
       default: 0.0,
     },
-    uniqueId: {
-      type: String,
-      required: true,
-      unique: true,
-    },
     isPaid: {
       type: Boolean,
       required: true,
