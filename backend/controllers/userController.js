@@ -10,8 +10,6 @@ const login = asyncHandler(async (req, res) => {
 
   let user = await User.findOne({ email })
 
-  // console.log("first", user, email, password)
-
   if (user && (await user.matchPassword(password))) {
     user = {
       _id: user._id,
@@ -30,7 +28,7 @@ const login = asyncHandler(async (req, res) => {
 
 // @desc Get user profile
 // @route GET /api/users/profile
-// @access Public
+// @access Private
 const getUserProfile = asyncHandler(async (req, res) => {
   let user = await User.findById(req.user.id)
 
@@ -50,4 +48,28 @@ const getUserProfile = asyncHandler(async (req, res) => {
   }
 })
 
-module.exports = { login, getUserProfile }
+// @desc Create new user
+// @route POST /api/users/register
+// @access Public
+const register = asyncHandler(async (req, res) => {
+  const { name, email, password } = req.body
+
+  const user = await User.findOne({ email })
+
+  if (user) {
+    res.status(400)
+    throw new Error(`Email already axist!`)
+  }
+
+  let newUser = new User({ name, email, password })
+
+  try {
+    newUser = await newUser.save()
+    res.status(201).json(newUser)
+  } catch (error) {
+    res.status(400)
+    throw new Error(error)
+  }
+})
+
+module.exports = { login, getUserProfile, register }

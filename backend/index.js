@@ -35,6 +35,16 @@ app.use("/api/users", userRoutes)
 app.use("/api/orders", orderRoutes)
 app.use("/api/test", testRoutes)
 
+if (process.env.NODE_ENV == "production") {
+  app.use(express.static("backend/build"))
+
+  const path = require("path")
+
+  app.get("/", (req, res) => {
+    res.sendFile(path.resolve(__dirname, "backend/build", "index.html"))
+  })
+}
+
 app.use(notFound)
 app.use(errorHandler)
 

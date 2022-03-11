@@ -11,7 +11,8 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "data:import": "node backend/data/seeder",
     "data:destroy": "node backend/data/seeder -d",
-    "testcase": "node backend/test"
+    "testcase": "node backend/test",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "author": "SK Himel Bikon",
   "license": "ISC",

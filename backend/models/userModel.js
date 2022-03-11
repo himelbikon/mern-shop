@@ -5,11 +5,11 @@ const userSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      require: true,
+      required: true,
     },
     email: {
       type: String,
-      require: true,
+      required: true,
       unique: true,
     },
     password: {
@@ -33,11 +33,12 @@ userSchema.methods.matchPassword = async function (enteredPassword) {
 }
 
 userSchema.pre("save", async function (next) {
-  if (!isModified("password")) {
+  if (!this.isModified("password")) {
+    console.log("---------------- not salt", this.password)
     next()
   }
 
-  const salt = bcrypt.genSalt(10)
+  const salt = await bcrypt.genSalt(10)
   this.password = await bcrypt.hash(this.password, salt)
 })
 
