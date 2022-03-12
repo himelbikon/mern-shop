@@ -65,6 +65,15 @@ const register = asyncHandler(async (req, res) => {
 
   try {
     newUser = await newUser.save()
+
+    newUser = {
+      _id: newUser._id,
+      name: newUser.name,
+      email: newUser.email,
+      isAdmin: newUser.isAdmin,
+      token: generateToken(newUser._id),
+    }
+
     res.status(201).json(newUser)
   } catch (error) {
     res.status(400)

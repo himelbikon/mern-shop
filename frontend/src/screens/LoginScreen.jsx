@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import { Form, Button, Row, Col, Spinner } from "react-bootstrap"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, useSearchParams } from "react-router-dom"
@@ -32,7 +33,10 @@ const LoginScreen = () => {
   return (
     <Row className="justify-content-center">
       <Col lg={4}>
-        <Form className="my-5 bg-white p-4 rounded border">
+        <Form
+          className="my-5 bg-white p-4 rounded border"
+          onSubmit={formHandler}
+        >
           <h3 className="mb-4 text-center">Login</h3>
 
           <Form.Group className="mb-4" controlId="formBasicEmail">
@@ -68,7 +72,6 @@ const LoginScreen = () => {
             className="w-100 mt-2"
             variant="primary"
             type="submit"
-            onClick={formHandler}
             disabled={loading}
           >
             {loading ? (
@@ -84,9 +87,9 @@ const LoginScreen = () => {
             )}
           </Button>
 
-          {/* <div className="mt-4 text-center">
+          <div className="mt-4 text-center">
             No account? <Link to="/register">Register</Link>
-          </div> */}
+          </div>
         </Form>
       </Col>
     </Row>
